@@ -20,8 +20,10 @@ c
 c
       subroutine esolv1
       use atoms
+      use ddx_interface
       use deriv
       use energi
+      use iounit
       use limits
       use math
       use mpole
@@ -135,6 +137,14 @@ c
             call egb1a
          end if
          call born1
+      else if (use_ddx) then
+         if (.not. use_polar) then
+            !call eddx1
+            write(iout,*) "work in progress"
+         else
+            write(iout,*) "ddX with polarization is not yet implemented"
+            call fatal
+         end if
       end if
       return
       end

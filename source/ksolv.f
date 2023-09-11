@@ -21,6 +21,7 @@ c
       use sizes
       use atomid
       use atoms
+      use ddx_interface
       use inform
       use iounit
       use keys
@@ -106,6 +107,18 @@ c
                solvtyp = 'PB-HPMF'
             else if (value(1:2) .eq. 'PB') then
                solvtyp = 'PB'
+            else if (value(1:7) .eq. 'DDCOSMO') then
+               solvtyp = 'DDX'
+               use_ddx = .true.
+               ddx_typ = 'COSMO'
+            else if (value(1:5) .eq. 'DDPCM') then
+               use_ddx = .true.
+               solvtyp = 'DDX'
+               ddx_typ = 'PCM'
+            else if (value(1:5) .eq. 'DDLPB') then
+               use_ddx = .true.
+               solvtyp = 'DDX'
+               ddx_typ = 'LPB'
             end if
          else if (keyword(1:12) .eq. 'BORN-RADIUS ') then
             call getword (record,value,next)
@@ -175,6 +188,10 @@ c
             end if
          end if
       end do
+c
+c     set ddx parameters to defaults or read them from input
+c
+      if (use_ddx) call ddx_params
 c
 c     perform dynamic allocation of some global arrays
 c

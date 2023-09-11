@@ -41,6 +41,10 @@ fftw := default__
 ##  APBS_INC_DIR    Directory with APBS Include Files
 ##  APBS_LIB_DIR    Directory with APBS Libraries
 ##  APBS_LIBS       APBS Libraries needed to build Tinker
+##  DDX             ddX Top-Level Directory
+##  DDX_INC_DIR     Directory with ddX .mod files
+##  DDX_LIBDIR      Directory with libddx.so
+##  DDX_LIBS        Linker commands
 
 TINKERDIR := $(HOME)/tinker
 TINKER_LIBDIR := $(TINKERDIR)/lib
@@ -59,6 +63,11 @@ APBSDIR := $(TINKERDIR)/apbs
 APBS_INCDIR := -I$(APBSDIR)/include
 APBS_LIBDIR := -L$(APBSDIR)/lib
 APBS_LIBS := -lapbsmainroutines -lapbs -lmaloc -lapbsblas
+
+DDXDIR := $(TINKERDIR)/ddX
+DDX_INCDIR := -I$(DDXDIR)/build/src
+DDX_LIBDIR := -L$(DDXDIR)/build/src
+DDX_LIBS := -lddx
 
 ######################
 ## Operating System ##
@@ -206,6 +215,8 @@ SUBROUTINE_TYPE = 'SUBROUTINE_TYPE'
 SUBROUTINE_FILES = []
 DEPENDENCY = []
 
+DDX_MODULES = ["ddx_core", "ddx_multipolar_solutes", "ddx", "ddx_errors"]
+
 class dependency_record:
     def __init__(self):
         self.target = ''
@@ -252,6 +263,8 @@ def determine_module_subroutine_program(fortran_filename):
                 if len(temp_list) > 1:
                     word = temp_list[1]
                     if word not in use_list:
+                        if word in DDX_MODULES:
+                            continue
                         use_list.append(word)
     if file_type == UNKNOWN_TYPE:
         file_type = SUBROUTINE_TYPE
@@ -316,12 +329,12 @@ def print_dependency():
 
 def target_o():
     print('%.o: $(src)/%.f')
-    print('\t$(F77) $(F77FLAGS) $(OPTFLAGS) $< -o $@')
+    print('\t$(F77) $(F77FLAGS) $(OPTFLAGS) $(DDX_INCDIR) $< -o $@')
     print('')
 
 def target_x():
     print('%.x: %.o libtinker.a')
-    print('\t$(F77) $(LINKFLAGS) -o $@ $(LIBDIR) $(FFTW_LIBDIR) $^ $(LIBS) $(FFTW_LIBS); strip $@')
+    print('\t$(F77) $(LINKFLAGS) -o $@ $(LIBDIR) $(FFTW_LIBDIR) $(DDX_LIBDIR) $^ $(LIBS) $(FFTW_LIBS) $(DDX_LIBS); strip $@')
     print('')
 
 def all_install_clean_listing():

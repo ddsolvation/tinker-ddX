@@ -23,6 +23,7 @@ c
       use analyz
       use atomid
       use atoms
+      use ddx_interface
       use energi
       use inform
       use iounit
@@ -146,6 +147,14 @@ c
             call egb3b
          else
             call egb3a
+         end if
+      else if (solvtyp(1:3) .eq. 'DDX') then
+         if (.not. use_polar) then
+            write(iout,*) "work in progress"
+            !call eddx3
+         else
+            write(iout,*) "ddX with polarization is not yet implemented"
+            call fatal
          end if
       end if
 c
