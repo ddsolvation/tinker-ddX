@@ -1,0 +1,42 @@
+
+     ######################################################################
+   ##########################################################################
+  ###                                                                      ###
+ ###            Tinker  ---  Software Tools for Molecular Design            ###
+ ##                                                                          ##
+ ##                      Version 8.10.2   February 2022                      ##
+ ##                                                                          ##
+ ##               Copyright (c)  Jay William Ponder  1990-2022               ##
+ ###                           All Rights Reserved                          ###
+  ###                                                                      ###
+   ##########################################################################
+     ######################################################################
+
+ Use option `ddx se` only for debug
+   +----------------------------------------------------------------+
+  |                                                                |
+  |                        888      888 Y8b    d8Y                 |
+  |                        888      888  Y8b  d8Y                  |
+  |                        888      888   Y8888Y                   |
+  |                    .d88888  .d88888    Y88Y                    |
+  |                   d88  888 d88  888    d88b                    |
+  |                   888  888 888  888   d8888b                   |
+  |                   Y88b 888 Y88b 888  d8Y  Y8b                  |
+  |                     Y88888   Y88888 d8Y    Y8b                 |
+  |                                                                |
+  |                 https://ddsolvation.github.io/ddX/             |
+  |                         Version: 0.3.0                         |
+  |                                                                |
+  +----------------------------------------------------------------+
+                  ddx_init time(s):        0.0520000000
+                 build_phi time(s):        0.0030000000
+                 build_psi time(s):        0.0000000000
+              ddlpb_solve time (s):        0.9738070590
+            ddlpb_solve iterations:                  12
+        Solvation energy (Hartree):       -0.0135682233
+
+ Total Potential Energy :                 -8.5142 Kcal/mole
+
+ Energy Component Breakdown :           Kcal/mole        Interactions
+
+ Implicit Solvation                       -8.5142                0
