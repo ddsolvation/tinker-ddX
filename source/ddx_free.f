@@ -16,4 +16,13 @@ c     check if everything is deallocated
 c
       call check_error(ddx_error)
 c
+c     dellocate psi
+c
+      deallocate(psi,stat=info)
+      if (info .ne. 0) then
+         write(iout,*) 'Deallocation in ddx_free failed'
+         call fatal
+      end if
+c
+c
       end subroutine ddx_free

@@ -45,11 +45,20 @@ c
 c
 c     init also the object that contains the solutions
 c
-      call init_state(ddx_data%params,ddx_data%constants,ddx_state,
+      call allocate_state(ddx_data%params,ddx_data%constants,ddx_state,
      &   ddx_error)
 c
 c     check if initialization was successful
 c
       call check_error(ddx_error)
+c
+c     finally allocate psi
+c
+      allocate(psi(ddx_data%constants%nbasis,ddx_data%params%nsph),
+     &   stat=info)
+      if (info .ne. 0) then
+         write(iout,*) 'Allocation of RHS failed in ddx_init'
+         call fatal
+      end if
 c
       end subroutine ddx_init

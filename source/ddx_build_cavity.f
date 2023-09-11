@@ -48,6 +48,5 @@ c
       ddx_coords(1,:) = x(:n)/bohr
       ddx_coords(2,:) = y(:n)/bohr
       ddx_coords(3,:) = z(:n)/bohr
-      centered_on_m = .true.
 c
       end subroutine ddx_build_cavity

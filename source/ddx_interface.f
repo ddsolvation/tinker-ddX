@@ -8,11 +8,11 @@ c
 c     external module from libddx.so
       use ddx_core , only : ddx_type, ddx_state_type, deallocate_model,
      &   deallocate_state, allocate_state, get_banner,
-     &   closest_supported_lebedev_grid
+     &   closest_supported_lebedev_grid, ddx_electrostatics_type
       use ddx_multipolar_solutes , only: multipole_electrostatics,
-     &   multipole_force_terms
-      use ddx_errors , only : ddx_error_type
-      use ddx , only: ddinit
+     &   multipole_force_terms, multipole_psi
+      use ddx_errors , only : ddx_error_type, check_error
+      use ddx , only: ddinit, ddrun
       implicit none
 c
 c     flags used by Tinker
@@ -30,6 +30,7 @@ c
       type(ddx_type) ddx_data
       type(ddx_state_type) ddx_state
       type(ddx_error_type) ddx_error
+      type(ddx_electrostatics_type) ddx_electrostatics
 c
 c     control parameters for ddx
 c
@@ -52,11 +53,9 @@ c     information about the cavity (union of spheres):
 c     nsph            number of spheres
 c     ddx_coords      coordinates of the centers (3,nsph)
 c     ddx_radii       radii of the spheres (nsph)
-c     centered_on_m   true if the spheres are centered on the multipoles
 c
       integer nsph
       real*8, allocatable :: ddx_radii(:), ddx_coords(:,:)
-      logical centered_on_m
 c
 c     RHSs for ddX: Phi (potential) and Psi
 c

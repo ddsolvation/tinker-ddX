@@ -143,8 +143,7 @@ c
          call born1
       else if (use_ddx) then
          if (.not. use_polar) then
-            !call eddx1
-            write(iout,*) "work in progress"
+            call ddx_run(.true.)
          else
             write(iout,*) "ddX with polarization is not yet implemented"
             call fatal

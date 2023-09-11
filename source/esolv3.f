@@ -154,7 +154,7 @@ c
          end if
       else if (solvtyp(1:3) .eq. 'DDX') then
          if (.not. use_polar) then
-            !call eddx3
+            call ddx_run(.false.)
          else
             write(iout,*) "ddX with polarization is not yet implemented"
             call fatal
