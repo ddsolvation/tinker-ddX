@@ -105,6 +105,10 @@ c
             aes(i) = aecav(i) + aedisp(i)
          end do
 c
+c     for now skip DDX non polar energy
+c
+      else if (solvtyp.eq.'DDX') then
+c
 c     nonpolar energy via ACE surface area approximation
 c
       else
@@ -150,7 +154,6 @@ c
          end if
       else if (solvtyp(1:3) .eq. 'DDX') then
          if (.not. use_polar) then
-            write(iout,*) "work in progress"
             !call eddx3
          else
             write(iout,*) "ddX with polarization is not yet implemented"

@@ -96,6 +96,10 @@ c
          call enp1 (ecav,edisp)
          es = ecav + edisp
 c
+c     for now skip DDX non polar energy
+c
+      else if (solvtyp.eq.'DDX') then
+c
 c     nonpolar energy and derivs via ACE area approximation
 c
       else
