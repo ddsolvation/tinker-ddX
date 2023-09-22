@@ -16,9 +16,10 @@ c     check if everything is deallocated
 c
       call check_error(ddx_error)
 c
-c     dellocate psi
+c     dellocate the various quantities
 c
-      deallocate(psi,stat=info)
+      deallocate(psi,ddx_multipoles,ddx_mcoords,ddx_coords,ddx_radii,
+     &   stat=info)
       if (info .ne. 0) then
          write(iout,*) 'Deallocation in ddx_free failed'
          call fatal
